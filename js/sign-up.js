@@ -28,12 +28,43 @@ $(function() {
 				return false;
 			}
 		}
+
+		var reqField;
+		var reqValue
+
+		reqField = signupForm.find('input[name="first-name"]');
+		reqValue = reqField.val().trim();
+		if (0 === reqValue.length) {
+			alert('You must enter a first name!');
+			return false;
+		}
+
+
 	});
 
 	$('.cancel-signup').click(function() {
-		window.location = 'http://www.google.com';
-
+		$('.cancel-signup-modal').modal();
 	});
+
+	$('.btn-abandon').click(function(){
+		window.location = 'http://www.google.com';
+	});
+
+	$('select[name="refer"]').change(function(){
+		var referSelect = $(this);
+		var otherInput = $('[name="refer-other"]');
+
+		if ('other' === referSelect.val().toLowerCase()) {
+			otherInput.removeAttr('disabled');
+			otherInput.show();
+			otherInput.focus();
+		} else {
+			otherInput.attr('disabled', true);
+			otherInput.hide();
+		}
+	});
+
+
 
 
 
